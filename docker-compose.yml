@@ -18,7 +18,7 @@ services:
   calc:
     container_name: calc_distance_api
     build:
-      context: ../distance_api_flask
+      context: ../api_flask_calc_distance
     ports:
       - "5001:5001"
     command: gunicorn app:app --bind 0.0.0.0:5001
