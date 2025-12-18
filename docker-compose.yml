@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  fretes:
+    container_name: fretes_api
+    build:
+      context: ./
+    ports:
+      - "5000:5000"
+    command: gunicorn app:app --bind 0.0.0.0:5000
+    depends_on:
+      - calc  
+    volumes:
+      - ./instance:/app/instance
+    
+    restart: unless-stopped
+
+  calc:
+    container_name: calc_distance_api
+    build:
+      context: ../distance_api_flask
+    ports:
+      - "5001:5001"
+    command: gunicorn app:app --bind 0.0.0.0:5001
+    restart: unless-stopped
